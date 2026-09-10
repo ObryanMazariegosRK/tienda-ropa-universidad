@@ -1,0 +1,593 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* ==========================================================
+   AMERISHOP — AUTENTICACIÓN
+   Login, registro, verificación y recuperación de contraseña
+   ========================================================== */
+
+:root {
+  --auth-primary: #39ff14;
+  --auth-primary-hover: #22c55e;
+  --auth-primary-dark: #15803d;
+
+  --auth-black: #111111;
+  --auth-black-soft: #18181b;
+  --auth-panel: #161618;
+
+  --auth-white: #ffffff;
+  --auth-text: #f8fafc;
+  --auth-text-muted: #a1a1aa;
+
+  --auth-border: #3f3f46;
+  --auth-input: #1f1f22;
+
+  --auth-danger: #ef4444;
+  --auth-warning: #f59e0b;
+  --auth-success: #22c55e;
+}
+
+/* Base */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--auth-black);
+  color: var(--auth-text);
+  font-family: "Inter", Arial, sans-serif;
+}
+
+/* Layout general */
+.ftco-section {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: 32px 18px;
+  background: #111111;
+}
+
+.ftco-section .container {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+
+.ftco-section .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Encabezado Bienvenido, si existe en la vista */
+.heading-section {
+  margin: 0 0 24px;
+  color: var(--auth-white);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+/* Contenedor principal */
+.wrap {
+  display: flex;
+  width: 100%;
+  min-height: 620px;
+  overflow: hidden;
+  background: var(--auth-panel);
+  border: 1px solid #29292d;
+  border-radius: 18px;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.45);
+}
+
+/* Imagen lateral */
+.wrap .img {
+  position: relative;
+  width: 43%;
+  min-height: 620px;
+  background-color: #0a0a0a;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Capa oscura sobre la imagen para mantener el estilo editorial */
+.wrap .img::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: rgba(0, 0, 0, 0.22);
+}
+
+/* Panel del formulario */
+.login-wrap {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 52px !important;
+  background: var(--auth-panel);
+}
+
+/* Encabezados */
+.login-wrap h3 {
+  margin: 0 0 8px;
+  color: var(--auth-white);
+  font-size: clamp(27px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.login-wrap h3::first-letter {
+  color: var(--auth-white);
+}
+
+/* Texto de apoyo para vistas futuras */
+.login-wrap .auth-subtitle,
+.login-wrap .text-muted {
+  color: var(--auth-text-muted);
+}
+
+/* Espaciado y campos */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  color: #d4d4d8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--auth-border);
+  border-radius: 10px;
+  outline: none;
+  background: var(--auth-input);
+  color: var(--auth-white);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+input.form-control {
+  padding: 0 15px;
+}
+
+textarea.form-control {
+  padding: 13px 15px;
+}
+
+.form-control::placeholder {
+  color: #71717a;
+}
+
+.form-control:hover {
+  border-color: #52525b;
+}
+
+.form-control:focus {
+  border: 1px solid var(--auth-primary);
+  background: #202024;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Botón principal */
+.btn,
+.btn-primary,
+.form-control.btn-primary,
+button[type="submit"] {
+  border: 0;
+  border-radius: 10px !important;
+  background: var(--auth-primary);
+  color: #111111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-control.btn-primary,
+button[type="submit"] {
+  min-height: 48px;
+  padding: 0 18px;
+}
+
+.btn-primary:hover,
+.form-control.btn-primary:hover,
+button[type="submit"]:hover {
+  background: var(--auth-primary-hover);
+  color: #111111;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(57, 255, 20, 0.18);
+}
+
+.btn-primary:active,
+.form-control.btn-primary:active,
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled,
+button[type="submit"]:disabled {
+  background: #52525b;
+  color: #d4d4d8;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Links */
+.login-wrap a {
+  color: var(--auth-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-wrap a:hover {
+  color: var(--auth-primary-hover);
+  text-decoration: underline;
+}
+
+.login-wrap .text-center {
+  margin: 22px 0 0;
+  color: var(--auth-text-muted);
+  font-size: 14px;
+}
+
+/* Recordarme */
+.checkbox-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding-left: 27px;
+  color: var(--auth-text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-wrap input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #52525b;
+  border-radius: 5px;
+  background: var(--auth-input);
+  transition: all 0.2s ease;
+}
+
+.checkbox-wrap input:checked ~ .checkmark {
+  border-color: var(--auth-primary);
+  background: var(--auth-primary);
+}
+
+.checkmark::after {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  display: none;
+  width: 5px;
+  height: 9px;
+  border: solid #111111;
+  border-width: 0 2px 2px 0;
+  content: "";
+  transform: rotate(45deg);
+}
+
+.checkbox-wrap input:checked ~ .checkmark::after {
+  display: block;
+}
+
+/* Login: recordar y recuperar contraseña */
+.form-group.d-md-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.form-group .w-50 {
+  width: auto;
+}
+
+.text-md-right {
+  text-align: right;
+}
+
+/* Íconos sociales del login */
+.social-media {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 0;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #303036;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--auth-white) !important;
+  text-decoration: none !important;
+}
+
+.social-icon:hover {
+  border-color: var(--auth-primary);
+  background: #202024;
+  color: var(--auth-primary) !important;
+}
+
+/* Mensajes de error, éxito y advertencia */
+.alert {
+  margin-top: 16px;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.alert-danger {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.13);
+  color: #fecaca;
+}
+
+.alert-success {
+  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.13);
+  color: #bbf7d0;
+}
+
+.alert-warning {
+  border-color: rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.13);
+  color: #fde68a;
+}
+
+.d-none {
+  display: none !important;
+}
+
+/* Accesibilidad */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--auth-primary);
+  outline-offset: 3px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .login-wrap {
+    padding: 40px !important;
+  }
+
+  .wrap .img {
+    width: 38%;
+  }
+}
+
+/* Móvil: imagen arriba, formulario abajo */
+@media (max-width: 767px) {
+  .ftco-section {
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  .ftco-section .container {
+    max-width: 520px;
+  }
+
+  .heading-section {
+    margin-bottom: 16px;
+    font-size: 25px;
+  }
+
+  .wrap,
+  .wrap.d-md-flex {
+    display: flex !important;
+    flex-direction: column;
+    min-height: 0;
+    border-radius: 16px;
+  }
+
+  .wrap .img {
+    width: 100%;
+    min-height: 220px;
+    height: 220px;
+    background-position: center;
+  }
+
+  .login-wrap {
+    width: 100%;
+    padding: 30px 22px !important;
+  }
+
+  .login-wrap h3 {
+    font-size: 28px;
+  }
+
+  .form-group.d-md-flex {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .form-group .w-50 {
+    width: 100%;
+  }
+
+  .text-md-right {
+    text-align: left;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 390px) {
+  .ftco-section {
+    padding: 10px;
+  }
+
+  .wrap .img {
+    min-height: 180px;
+    height: 180px;
+  }
+
+  .login-wrap {
+    padding: 26px 18px !important;
+  }
+
+  .login-wrap h3 {
+    font-size: 25px;
+  }
+}
+
+/* ==========================================================
+   CORRECCIÓN DE ANCHO — LOGIN AMERISHOP
+   Pegar al FINAL de public/Auth/css/style.css
+   ========================================================== */
+
+/* Fuerza el ancho de las columnas aunque Bootstrap no cargue sus estilos */
+.ftco-section .row,
+.ftco-section .col-md-12,
+.ftco-section .col-lg-10,
+.ftco-section .col-md-6 {
+  width: 100%;
+}
+
+/* El login ocupará un ancho editorial amplio en computadora */
+.ftco-section .container {
+  width: min(100%, 1140px);
+}
+
+.ftco-section .wrap,
+.ftco-section .wrap.d-md-flex {
+  display: flex !important;
+  flex-direction: row;
+  width: 100%;
+  min-height: 650px;
+}
+
+/* Imagen amplia a la izquierda */
+.ftco-section .wrap .img {
+  flex: 0 0 46%;
+  width: 46%;
+  min-height: 650px;
+  background-position: center center;
+  background-size: cover;
+}
+
+/* Panel del formulario con espacio suficiente */
+.ftco-section .login-wrap {
+  flex: 0 0 54%;
+  width: 54%;
+  min-width: 0;
+  padding: 64px !important;
+}
+
+/* Evita que el formulario e inputs se reduzcan */
+.ftco-section .signin-form,
+.ftco-section #loginForm,
+.ftco-section #registerForm,
+.ftco-section .form-group,
+.ftco-section .form-control {
+  width: 100%;
+}
+
+.ftco-section .login-wrap .d-flex {
+  width: 100%;
+}
+
+/* Teléfono: imagen arriba y formulario debajo */
+@media (max-width: 767px) {
+  .ftco-section .wrap,
+  .ftco-section .wrap.d-md-flex {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .ftco-section .wrap .img {
+    width: 100%;
+    min-height: 280px;
+    height: clamp(280px, 62vw, 380px);
+    background-position: center 35%;
+  }
+
+  .ftco-section .login-wrap {
+    width: 100%;
+    padding: 34px 24px !important;
+  }
+
+  .ftco-section .login-wrap h3 {
+    font-size: 30px;
+  }
+}
+
+/* Teléfonos pequeños */
+@media (max-width: 390px) {
+  .ftco-section .wrap .img {
+    min-height: 230px;
+    height: 230px;
+  }
+
+  .ftco-section .login-wrap {
+    padding: 28px 18px !important;
+  }
+}
+
+
+/* Ajuste fino del login */
+.login-wrap {
+  justify-content: flex-start;
+  padding-top: 135px !important;
+}
+
+.login-wrap h3 {
+  margin-bottom: 34px;
+}
