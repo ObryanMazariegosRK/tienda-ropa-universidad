@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const CAT_API_URL = "http://localhost:8000/api/categories";
-    const PRODUCT_API_URL = "http://localhost:8000/api/products";
-    
+    const CAT_API_URL = "/api/categories";
+    const PRODUCT_API_URL = "/api/products";
     const categorySelect = document.getElementById("categoryId");
     const subcategorySelect = document.getElementById("subcategoryId");
     const imageInput = document.getElementById("images");

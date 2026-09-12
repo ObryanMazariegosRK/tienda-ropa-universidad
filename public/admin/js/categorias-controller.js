@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = "http://localhost:8000/api/categories"; 
+    const API_URL = "/api/categories"; 
     //Diccionario para guardar los datos de las categorias
     const memoryBank = new Map();
     let listaProductosMemoria = [];
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (!yaSeCargaronLasSubcategorias) {
                         
                         //usamos el endPoint para traer las subcategorias de la categoria
-                        fetch(`http://localhost:8000/api/categories/parent/${parent.id}`)
+                        fetch(`/api/categories/parent/${parent.id}`)
                             .then(response => response.json())
                             .then(res => {
                                 // 1. Acomodamos los datos sin importar cómo vengan de Laravel

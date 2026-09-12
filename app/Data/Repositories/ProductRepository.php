@@ -16,7 +16,7 @@ class ProductRepository implements IProductRepository{
     public function save(Product $product): Product{
         $model= new ProductModel();
 
-        $model->category_Id=$product->getCategoryId();
+        $model->category_id=$product->getCategoryId();
         $model->name=$product->getName();
         $model->description=$product->getDescription();
         $model->slug = $product->getSlug();
@@ -49,7 +49,7 @@ class ProductRepository implements IProductRepository{
     public function update(Product $product):void{
         $model= ProductModel::findOrFail($product->getId());
 
-        $model->category_Id=$product->getCategoryId();
+        $model->category_id=$product->getCategoryId();
         $model->name = $product->getName();
         $model->description = $product->getDescription();
         $model->slug = $product->getSlug();
@@ -152,7 +152,7 @@ class ProductRepository implements IProductRepository{
 
         $product=new  Product(
             $model->id,
-            $model->category_Id,
+            $model->category_id,
             $model->name,
             $model->description,
             $model->slug,

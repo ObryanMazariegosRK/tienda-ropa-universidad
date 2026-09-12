@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_Id')
-                  ->constrained('categories')
+                  ->constrained('categories');
                   //No se puede eliminar una cateogia si tiene un producto 
-                  ->restrictOnDelete();
+                  //Al utilizar oracle no utilizamos nada xd ya que lo hace por defecto 
+                  //el impedir que se elimine en cascada->noActionOnDelete();
 
             $table->string('name',200);
             $table->text('description');

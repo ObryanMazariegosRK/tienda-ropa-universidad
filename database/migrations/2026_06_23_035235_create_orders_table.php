@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             
-            $table->foreignId('user_id')->constrained('users')->restrictOnDelete();
-            $table->foreignId('address_id')->constrained('addresses')->restrictOnDelete();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('address_id')->constrained('addresses');
             //Para guardar la direccion en la orden en caso de que cambie despues no cambiara en la orden
             $table->string('shipping_address', 500); 
             $table->decimal('total', 10, 2);

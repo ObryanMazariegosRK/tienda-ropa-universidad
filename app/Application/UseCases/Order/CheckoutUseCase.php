@@ -10,6 +10,7 @@ use App\Domain\Abstractions\ICartRepository;
 use App\Domain\Abstractions\IAddressRepository;
 use App\Domain\Abstractions\IOrderRepository;
 use App\Domain\Abstractions\IOrderDetailRepository;
+use App\Domain\Abstractions\IProductRepository;
 use App\Domain\Entities\Order;
 use App\Domain\Entities\OrderDetail;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,8 @@ class CheckoutUseCase implements ICheckoutUseCase
         private ICartRepository $cartRepository,
         private IAddressRepository $addressRepository,
         private IOrderRepository $orderRepository,
-        private IOrderDetailRepository $orderDetailRepository
+        private IOrderDetailRepository $orderDetailRepository,
+        private IProductRepository $productRepository
     ) {}
 
     public function execute(int $userId, int $addressId): CheckoutResultDTO
@@ -64,9 +66,25 @@ class CheckoutUseCase implements ICheckoutUseCase
             }, $cartRows);
 
             $this->orderDetailRepository->createMany($details);
+
+            // Marcamos como vendido cada producto comprado (son piezas únicas)
+            foreach ($cartRows as $row) {
+                $producto = $this->productRepository->findById($row['cartItem']->getProductId());
+                if ($producto) {
+                    $producto->markAsSold();
+                    $this->productRepository->update($producto);
+                }
+            }
+
             $this->cartRepository->clearByUserId($userId);
 
             return $createdOrder;
+
+
+
+
+
+
         });
 
         // Armamos los items del DTO reutilizando lo que ya teníamos del carrito
